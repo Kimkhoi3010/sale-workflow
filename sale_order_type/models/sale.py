@@ -21,6 +21,7 @@ class SaleOrder(models.Model):
         copy=True,
         check_company=True,
     )
+    order_type_required = fields.Boolean(related="company_id.sale_order_type_required")
     # Fields converted to computed writable
     picking_policy = fields.Selection(
         compute="_compute_picking_policy", store=True, readonly=False
@@ -111,6 +112,24 @@ class SaleOrder(models.Model):
             order_type = order.type_id
             if order_type.pricelist_id:
                 order.pricelist_id = order_type.pricelist_id
+        return res
+
+    @api.depends("type_id")
+    def _compute_user_id(self):
+        res = super()._compute_user_id()
+        for order in self.filtered("type_id"):
+            order_type = order.type_id
+            if order_type.user_id:
+                order.user_id = order_type.user_id
+        return res
+
+    @api.depends("type_id")
+    def _compute_team_id(self):
+        res = super()._compute_team_id()
+        for order in self.filtered("type_id"):
+            order_type = order.type_id
+            if order_type.team_id:
+                order.team_id = order_type.team_id
         return res
 
     @api.depends("type_id")

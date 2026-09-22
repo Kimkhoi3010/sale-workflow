@@ -9,25 +9,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-19 21:55+0000\n"
-"PO-Revision-Date: 2023-10-19 23:59+0200\n"
-"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"PO-Revision-Date: 2026-09-17 05:29+0000\n"
+"Last-Translator: Enric Tobella <etobella@creublanca.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__active
 msgid "Active"
 msgstr "Activo"
-
-#. module: sale_order_type
-#: model:ir.model.fields,field_description:sale_order_type.field_sale_order__analytic_account_id
-msgid "Analytic Account"
-msgstr "Cuenta Analítica"
 
 #. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__analytic_account_id
@@ -46,14 +41,32 @@ msgid "Billing Journal"
 msgstr "Diario de facturación"
 
 #. module: sale_order_type
+#: model_terms:ir.ui.view,arch_db:sale_order_type.res_config_settings_view_form
+msgid ""
+"Check this if you want the sale order type required on sale order forms."
+msgstr ""
+"Marque esto si desea que el tipo de pedido de venta sea obligatorio en los "
+"formularios de pedido de venta."
+
+#. module: sale_order_type
 #: model_terms:ir.actions.act_window,help:sale_order_type.sot_sale_order_type_action
 msgid "Click to set a new type for sale order."
 msgstr "Pulse para establecer un nuevo tipo de pedido de ventas."
 
 #. module: sale_order_type
+#: model:ir.model,name:sale_order_type.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__company_id
 msgid "Company"
 msgstr "Compañía"
+
+#. module: sale_order_type
+#: model:ir.model,name:sale_order_type.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
 
 #. module: sale_order_type
 #: model:ir.model,name:sale_order_type.model_res_partner
@@ -100,6 +113,13 @@ msgstr "Agrupar por"
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__id
 msgid "ID"
 msgstr "ID"
+
+#. module: sale_order_type
+#: model:ir.model.fields,help:sale_order_type.field_res_company__sale_order_type_required
+#: model:ir.model.fields,help:sale_order_type.field_res_config_settings__sale_order_type_required
+#: model:ir.model.fields,help:sale_order_type.field_sale_order__order_type_required
+msgid "If checked, the sale orders will require a type."
+msgstr "Si está marcado, los pedidos de venta requerirán un tipo."
 
 #. module: sale_order_type
 #: model:ir.model.fields,help:sale_order_type.field_sale_order__picking_policy
@@ -156,7 +176,6 @@ msgstr "Nombre"
 #. module: sale_order_type
 #. odoo-python
 #: code:addons/sale_order_type/models/sale.py:0
-#, python-format
 msgid "New"
 msgstr "Nuevo/a"
 
@@ -193,6 +212,12 @@ msgid "Route"
 msgstr "Ruta"
 
 #. module: sale_order_type
+#: model:ir.model.fields,field_description:sale_order_type.field_res_partner__effective_pricelist_id
+#: model:ir.model.fields,field_description:sale_order_type.field_res_users__effective_pricelist_id
+msgid "Sale Effective Pricelist"
+msgstr "Lista de precio efectiva"
+
+#. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_account_invoice_report__sale_type_id
 #: model:ir.model.fields,field_description:sale_order_type.field_res_partner__sale_type
 #: model:ir.model.fields,field_description:sale_order_type.field_res_users__sale_type
@@ -202,9 +227,16 @@ msgid "Sale Order Type"
 msgstr "Tipo de pedido de venta"
 
 #. module: sale_order_type
+#: model:ir.model.fields,field_description:sale_order_type.field_res_company__sale_order_type_required
+#: model:ir.model.fields,field_description:sale_order_type.field_res_config_settings__sale_order_type_required
+#: model:ir.model.fields,field_description:sale_order_type.field_sale_order__order_type_required
+msgid "Sale Order Type Required"
+msgstr "Tipo de pedido de venta requerido"
+
+#. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_account_bank_statement_line__sale_type_id
 #: model:ir.model.fields,field_description:sale_order_type.field_account_move__sale_type_id
-#: model:ir.model.fields,field_description:sale_order_type.field_account_payment__sale_type_id
+#: model_terms:ir.ui.view,arch_db:sale_order_type.sot_invoice_search
 msgid "Sale Type"
 msgstr "Tipo de venta"
 
@@ -235,6 +267,18 @@ msgid "Sales Order Types"
 msgstr "Tipos de pedido de venta"
 
 #. module: sale_order_type
+#: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__team_id
+#: model_terms:ir.ui.view,arch_db:sale_order_type.sot_sale_order_type_search_view
+msgid "Sales Team"
+msgstr "Equipo de venta"
+
+#. module: sale_order_type
+#: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__user_id
+#: model_terms:ir.ui.view,arch_db:sale_order_type.sot_sale_order_type_search_view
+msgid "Salesperson"
+msgstr "Vendedor"
+
+#. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order__picking_policy
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__picking_policy
 #: model_terms:ir.ui.view,arch_db:sale_order_type.sot_sale_order_type_search_view
@@ -260,6 +304,18 @@ msgstr "Tipo de pedido de venta"
 #: model_terms:ir.ui.view,arch_db:sale_order_type.sot_sale_order_type_search_view
 msgid "Warehouse"
 msgstr "Almacén"
+
+#. module: sale_order_type
+#: model_terms:ir.ui.view,arch_db:sale_order_type.res_partner_sale_type_form_view
+msgid ""
+"When creating a Sales Order, above pricelist will be replaced by the one set "
+"on the sales order type:"
+msgstr ""
+"Cuando se crea un pedido de venta, la lista de precios se substituirá por la "
+"definida en el tipo de pedido de venta:"
+
+#~ msgid "Analytic Account"
+#~ msgstr "Cuenta Analítica"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Última modificación en"

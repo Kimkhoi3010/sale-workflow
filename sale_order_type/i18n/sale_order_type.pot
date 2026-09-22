@@ -35,13 +35,29 @@ msgid "Billing Journal"
 msgstr ""
 
 #. module: sale_order_type
+#: model_terms:ir.ui.view,arch_db:sale_order_type.res_config_settings_view_form
+msgid ""
+"Check this if you want the sale order type required on sale order forms."
+msgstr ""
+
+#. module: sale_order_type
 #: model_terms:ir.actions.act_window,help:sale_order_type.sot_sale_order_type_action
 msgid "Click to set a new type for sale order."
 msgstr ""
 
 #. module: sale_order_type
+#: model:ir.model,name:sale_order_type.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__company_id
 msgid "Company"
+msgstr ""
+
+#. module: sale_order_type
+#: model:ir.model,name:sale_order_type.model_res_config_settings
+msgid "Config Settings"
 msgstr ""
 
 #. module: sale_order_type
@@ -88,6 +104,13 @@ msgstr ""
 #. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__id
 msgid "ID"
+msgstr ""
+
+#. module: sale_order_type
+#: model:ir.model.fields,help:sale_order_type.field_res_company__sale_order_type_required
+#: model:ir.model.fields,help:sale_order_type.field_res_config_settings__sale_order_type_required
+#: model:ir.model.fields,help:sale_order_type.field_sale_order__order_type_required
+msgid "If checked, the sale orders will require a type."
 msgstr ""
 
 #. module: sale_order_type
@@ -176,6 +199,12 @@ msgid "Route"
 msgstr ""
 
 #. module: sale_order_type
+#: model:ir.model.fields,field_description:sale_order_type.field_res_partner__effective_pricelist_id
+#: model:ir.model.fields,field_description:sale_order_type.field_res_users__effective_pricelist_id
+msgid "Sale Effective Pricelist"
+msgstr ""
+
+#. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_account_invoice_report__sale_type_id
 #: model:ir.model.fields,field_description:sale_order_type.field_res_partner__sale_type
 #: model:ir.model.fields,field_description:sale_order_type.field_res_users__sale_type
@@ -185,8 +214,16 @@ msgid "Sale Order Type"
 msgstr ""
 
 #. module: sale_order_type
+#: model:ir.model.fields,field_description:sale_order_type.field_res_company__sale_order_type_required
+#: model:ir.model.fields,field_description:sale_order_type.field_res_config_settings__sale_order_type_required
+#: model:ir.model.fields,field_description:sale_order_type.field_sale_order__order_type_required
+msgid "Sale Order Type Required"
+msgstr ""
+
+#. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_account_bank_statement_line__sale_type_id
 #: model:ir.model.fields,field_description:sale_order_type.field_account_move__sale_type_id
+#: model_terms:ir.ui.view,arch_db:sale_order_type.sot_invoice_search
 msgid "Sale Type"
 msgstr ""
 
@@ -217,6 +254,18 @@ msgid "Sales Order Types"
 msgstr ""
 
 #. module: sale_order_type
+#: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__team_id
+#: model_terms:ir.ui.view,arch_db:sale_order_type.sot_sale_order_type_search_view
+msgid "Sales Team"
+msgstr ""
+
+#. module: sale_order_type
+#: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__user_id
+#: model_terms:ir.ui.view,arch_db:sale_order_type.sot_sale_order_type_search_view
+msgid "Salesperson"
+msgstr ""
+
+#. module: sale_order_type
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order__picking_policy
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__picking_policy
 #: model_terms:ir.ui.view,arch_db:sale_order_type.sot_sale_order_type_search_view
@@ -241,4 +290,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:sale_order_type.field_sale_order_type__warehouse_id
 #: model_terms:ir.ui.view,arch_db:sale_order_type.sot_sale_order_type_search_view
 msgid "Warehouse"
+msgstr ""
+
+#. module: sale_order_type
+#: model_terms:ir.ui.view,arch_db:sale_order_type.res_partner_sale_type_form_view
+msgid ""
+"When creating a Sales Order, above pricelist will be replaced by the one set"
+" on the sales order type:"
 msgstr ""

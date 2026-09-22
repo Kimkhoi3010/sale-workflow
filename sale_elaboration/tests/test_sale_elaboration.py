@@ -1,5 +1,6 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import Command
 from odoo.tests import Form, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -11,9 +12,21 @@ class TestSaleElaboration(AccountTestInvoicingCommon):
     def setUpClass(cls):
         super().setUpClass()
         cls.Elaboration = cls.env["product.elaboration"]
+        cls.ElaborationProfile = cls.env["product.elaboration.profile"]
+        cls.category_1 = cls.env["product.category"].create({"name": "Meat"})
+        cls.category_2 = cls.env["product.category"].create({"name": "Fish"})
         cls.product = cls.env["product.product"].create(
             {"name": "test", "tracking": "none", "list_price": 1000}
         )
+        cls.product_2 = cls.env["product.product"].create(
+            {"name": "test 2", "tracking": "none", "list_price": 1000}
+        )
+        cls.product_3 = cls.env["product.product"].create(
+            {"name": "test 2", "tracking": "none", "list_price": 1000}
+        )
+        cls.product.categ_id = cls.category_1
+        cls.product_2.categ_id = cls.category_2
+        cls.product_3.categ_id = cls.category_1
         cls.product_elaboration_A = cls.env["product.product"].create(
             {
                 "name": "Product Elaboration A",
@@ -65,9 +78,25 @@ class TestSaleElaboration(AccountTestInvoicingCommon):
                 "product_id": cls.product_elaboration_B.id,
             }
         )
+        cls.elaboration_profile_a = cls.ElaborationProfile.create(
+            {
+                "name": "Elaboration Profile A",
+                "elaboration_ids": [
+                    Command.set([cls.elaboration_a.id, cls.elaboration_b.id])
+                ],
+            }
+        )
+        cls.elaboration_profile_b = cls.ElaborationProfile.create(
+            {
+                "name": "Elaboration Profile B",
+                "elaboration_ids": [Command.set(cls.elaboration_a.ids)],
+            }
+        )
+        cls.product.elaboration_profile_id = cls.elaboration_profile_a
         cls.order = cls._create_sale_order(
             cls, [(cls.product, 10, [cls.elaboration_a])]
         )
+        cls.category_1.elaboration_profile_id = cls.elaboration_profile_b
 
     def _create_sale_order(self, products_info):
         order_form = Form(self.env["sale.order"])
@@ -90,6 +119,17 @@ class TestSaleElaboration(AccountTestInvoicingCommon):
         self.order.order_line.elaboration_note = "Some details"
         self.order.order_line.elaboration_ids = self.elaboration_b
         self.assertEqual(self.order.order_line.elaboration_note, "Some details")
+
+    def test_sale_elaboration_onchange_disallow_auto_notes(self):
+        self.env["ir.config_parameter"].sudo().set_param(
+            "sale_elaboration.auto_notes", "0"
+        )
+        order_form = Form(self.order)
+        with order_form.order_line.new() as line_form:
+            line_form.product_id = self.product
+            line_form.product_uom_qty = 1
+            line_form.elaboration_ids.add(self.elaboration_a)
+            self.assertFalse(line_form.elaboration_note)
 
     def test_sale_elaboration(self):
         self.order.action_confirm()
@@ -197,3 +237,13 @@ class TestSaleElaboration(AccountTestInvoicingCommon):
                 },
             ],
         )
+
+    def test_sale_elaboration_done_move_changes(self):
+        self.order.action_confirm()
+        self.order.picking_ids.move_ids.quantity = 10.0
+        self.order.picking_ids.move_ids.picked = True
+        self.order.picking_ids._action_done()
+        self.order.picking_ids.move_ids.quantity = 15.0
+        elaboration_lines = self.order.order_line.filtered("is_elaboration")
+        self.assertEqual(len(elaboration_lines), 1)
+        self.assertEqual(elaboration_lines.product_uom_qty, 15.0)

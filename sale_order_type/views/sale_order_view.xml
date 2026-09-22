@@ -8,7 +8,7 @@
             <field name="currency_id" position="after">
                 <field
                     name="type_id"
-                    required="1"
+                    required="order_type_required"
                     readonly="state in ['sale', 'cancel'] or locked"
                 />
             </field>
@@ -30,6 +30,17 @@
                     context="{'group_by': 'type_id'}"
                 />
             </filter>
+        </field>
+    </record>
+
+    <record id="sot_view_order_list" model="ir.ui.view">
+        <field name="name">sale.order.list.sot</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree" />
+        <field name="arch" type="xml">
+            <field name='name' position="after">
+                <field name="type_id" optional="show" />
+            </field>
         </field>
     </record>
 </odoo>
